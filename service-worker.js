@@ -1,22 +1,26 @@
-<div id="partida-screen" class="game-screen">
-  <h2>Simulação de Partida</h2>
-  <div class="scoreboard">
-    <span id="home-team-name-scoreboard"></span>
-    <span id="home-score">0</span>
-    <span> - </span>
-    <span id="away-score">0</span>
-    <span id="away-team-name-scoreboard"></span>
-  </div>
-  <p id="match-minute" class="match-minute-display">Minuto: 0</p>
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches.open("fmanager-cache").then((cache) => {
+      return cache.addAll([
+        "/",
+        "/index.html",
+        "/style.css",
+        "/main.js",
+        "/js/ui.js",
+        "/js/core.js",
+        "/js/team.js",
+        "/js/match.js",
+        "/js/cup.js",
+        "/partials/elenco.html",
+        "/partials/taticas.html",
+        "/partials/partida.html"
+      ]);
+    })
+  );
+});
 
-  <div class="match-events-container">
-    <h3>Eventos da Partida</h3>
-    <ul id="events-list" class="scrollable match-event-list"></ul>
-  </div>
-
-  <div class="subs-actions">
-    <button id="simulate-match-btn" class="main-btn">▶️ Simular Partida</button>
-    <button id="pause-match-for-subs-btn" class="main-btn" style="display: none;">⏸️ Substituir Jogador</button>
-    <button id="continue-match-btn" class="main-btn" style="display: none;">⏯️ Continuar</button>
-  </div>
-</div>
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    caches.match(e.request).then((res) => res || fetch(e.request))
+  );
+});
