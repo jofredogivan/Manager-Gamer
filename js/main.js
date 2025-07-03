@@ -1,8 +1,8 @@
-// main.js
-import { initCore } from './js/core.js';
-import { initMatch, continueMatch } from './js/match.js';
-import { initCup } from './js/cup.js';
-import { loadPartials, initUI } from './js/ui.js';
+// js/main.js
+import { initCore } from './core.js';      // CORRIGIDO: de './js/core.js' para './core.js'
+import { initMatch, continueMatch } from './match.js'; // CORRIGIDO
+import { initCup } from './cup.js';        // CORRIGIDO
+import { loadPartials, initUI } from './ui.js'; // CORRIGIDO
 
 window.addEventListener('DOMContentLoaded', async () => {
   await loadPartials();
