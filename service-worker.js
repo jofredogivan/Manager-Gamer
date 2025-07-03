@@ -5,12 +5,14 @@ self.addEventListener("install", (e) => {
         "/",
         "/index.html",
         "/style.css",
-        "/main.js",
+        // Caminho corrigido para main.js
+        "/js/main.js", 
         "/js/ui.js",
         "/js/core.js",
-        "/js/team.js",
+        "/js/team.js", // <-- MANTENHA se existir, REMOVA se não existir
         "/js/match.js",
         "/js/cup.js",
+        // Caminhos para partials (assumindo que estão na pasta partials na raiz)
         "/partials/elenco.html",
         "/partials/taticas.html",
         "/partials/partida.html"
