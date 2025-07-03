@@ -1,3 +1,4 @@
+/* === BASE GERAL === */
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(to right, #141e30, #243b55);
@@ -21,23 +22,31 @@ body {
   box-sizing: border-box;
 }
 
+/* === BOTÕES === */
 .main-btn {
   background: linear-gradient(to right, #4CAF50, #45a049);
   color: white;
   padding: 12px 20px;
-  margin: 10px;
+  margin: 10px 5px;
   border: none;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   font-size: 1em;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 .main-btn:hover {
   transform: scale(1.05);
   background: linear-gradient(to right, #43a047, #388e3c);
 }
+.main-btn:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
+/* === HEADER INFO === */
 .header-info {
   background-color: #1f2a38;
   padding: 10px;
@@ -45,9 +54,33 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 20px;
 }
+.header-info p {
+  margin: 0;
+  font-size: 0.95em;
+}
 
+/* === MENSAGENS === */
+.game-message {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+.game-message-info {
+  background-color: #2196F3;
+}
+.game-message-success {
+  background-color: #4CAF50;
+}
+.game-message-danger {
+  background-color: #f44336;
+}
+
+/* === SCROLLABLE LISTAS === */
 .scrollable {
   max-height: 300px;
   overflow-y: auto;
@@ -85,21 +118,109 @@ body {
   background-color: #45a049;
 }
 
+/* === BANNER DO TIME === */
 #team-banner {
   padding: 10px;
   border-radius: 8px;
   color: white;
   margin-bottom: 15px;
   text-align: center;
+  background-color: #3b4b64;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+}
+#team-escudo {
+  display: block;
+  font-size: 2.5em;
+  margin-bottom: 5px;
 }
 
+/* === TÍTULOS DE SEÇÕES === */
+.section-title {
+  color: #4CAF50;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+/* === SUBSTITUIÇÃO E TÁTICAS === */
+.tactic-section {
+  background-color: #39424e;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.tactic-section h3 {
+  color: #4CAF50;
+  margin-top: 0;
+}
+.tactic-btn {
+  background-color: #555;
+  color: white;
+  border: 1px solid #666;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.tactic-btn:hover {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+.tactic-btn.selected {
+  background-color: #4CAF50;
+  border: 2px solid #81c784;
+}
+
+/* === PLACAR E EVENTOS === */
+.scoreboard {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #fff;
+  text-align: center;
+}
+.match-minute-display {
+  text-align: center;
+  font-size: 1.1em;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+.match-events-container {
+  background-color: #39424e;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.match-event-list li::before {
+  content: '⚽ ';
+  margin-right: 5px;
+}
+
+/* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
   .header-info {
     flex-direction: column;
     align-items: center;
   }
+
   .main-btn {
     width: 100%;
-    margin: 8px 0;
+    margin: 10px 0;
+  }
+
+  .scrollable {
+    max-height: 250px;
+  }
+
+  .scrollable li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .scrollable button {
+    align-self: flex-end;
+    margin-top: 5px;
   }
 }
