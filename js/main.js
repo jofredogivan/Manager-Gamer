@@ -1,20 +1,44 @@
 // js/main.js
 
 import { initMatch } from "./match.js";
+import { myTeam, generateTeamPlayers } from "./team.js";
+import { iniciarCopa } from "./cup.js";
+import { salvarJogo, carregarJogo } from "./storage.js";
+import { aumentarReputacao } from "./reputation.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
 
-  const partidaContainer = document.getElementById("partida-container");
-  const simulateBtn = document.getElementById("simulate-match-btn");
+  // Inicializa time
+  generateTeamPlayers();
+  atualizarHeader();
 
-  // Ativa o botão da simulação se estiver presente
-  if (simulateBtn) {
-    simulateBtn.addEventListener("click", () => {
-      initMatch();
-    });
-  }
+  // Botões principais
+  document.getElementById("simulate-match-btn")?.addEventListener("click", () => {
+    initMatch();
+    aumentarReputacao(5);
+  });
 
-  // Exemplo de ativação inicial se quiser simular direto:
-  // initMatch();
+  document.getElementById("iniciar-copa-btn")?.addEventListener("click", () => {
+    iniciarCopa(myTeam.name);
+  });
+
+  document.getElementById("salvar-btn")?.addEventListener("click", () => {
+    salvarJogo(myTeam);
+  });
+
+  document.getElementById("carregar-btn")?.addEventListener("click", () => {
+    const dados = carregarJogo();
+    if (dados) {
+      Object.assign(myTeam, dados);
+      atualizarHeader();
+    }
+  });
 });
+
+function atualizarHeader() {
+  document.getElementById("current-season").textContent = myTeam.season;
+  document.getElementById("current-round").textContent = myTeam.round;
+  document.getElementById("my-team-name").textContent = myTeam.name;
+  document.getElementById("team-money").textContent = "R$ " + myTeam.money.toLocaleString();
+}
