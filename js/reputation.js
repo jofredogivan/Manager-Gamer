@@ -1,16 +1,19 @@
-// js/reputation.js
+// js/cup.js
 
-let reputacao = 0;
+import { myTeam } from "./team.js";
+import { clubesSerieB } from "./clubes.js";
 
-export function aumentarReputacao(pontos) {
-  reputacao += pontos;
-  console.log("Reputação aumentada para:", reputacao);
-}
+export function iniciarCopa(timePrincipal) {
+  const adversario = clubesSerieB[Math.floor(Math.random() * clubesSerieB.length)];
+  const resultado = Math.random();
+  let mensagem = "";
 
-export function getReputacao() {
-  return reputacao;
-}
+  if (resultado > 0.5) {
+    mensagem = `🏆 Vitória contra ${adversario} na Copa!`;
+    myTeam.money += 10000;
+  } else {
+    mensagem = `❌ Derrota para ${adversario}. Eliminado na 1ª fase da Copa.`;
+  }
 
-export function resetarReputacao() {
-  reputacao = 0;
+  alert(mensagem);
 }
