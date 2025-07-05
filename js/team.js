@@ -43,3 +43,7 @@ export function generateTeamPlayers() {
 export function getTitulares() {
   return myTeam.players.filter(p => p.status === "Titular");
 }
+
+export function getReservas() {
+  return myTeam.players.filter(p => p.status === "Reserva");
+}
