@@ -7,6 +7,7 @@ import { salvarJogo, carregarJogo } from "./storage.js";
 import { aumentarReputacao } from "./reputation.js";
 import { sortearTimeRebaixado } from "./clubes.js";
 import { mostrarElenco } from "./elenco.js";
+import { mostrarTelaSubstituicoes } from "./substituicoes.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
@@ -43,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("view-squad-btn")?.addEventListener("click", () => {
     mostrarElenco();
+  });
+
+  // Botão de substituições (caso exista dinamicamente)
+  document.addEventListener("click", (e) => {
+    if (e.target && e.target.id === "abrir-substituicoes-btn") {
+      mostrarTelaSubstituicoes();
+    }
   });
 });
 
