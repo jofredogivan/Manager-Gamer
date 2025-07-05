@@ -1,35 +1,45 @@
 // js/team.js
 
 export const myTeam = {
-  name: "Time Genérico FC",
-  money: 500000,
+  name: "",
   season: 1,
   round: 1,
+  money: 50000,
+  reputation: 20,
   players: [],
+  formation: "4-4-2",
+  mentality: "balanced"
 };
 
 export function generateTeamPlayers() {
-  const positions = ["GOL", "ZAG", "MEI", "ATA"];
+  const positions = ["GOL", "ZAG", "LAT", "MEI", "ATA"];
+  const playerNames = [
+    "Lucas", "Pedro", "João", "Carlos", "Mateus",
+    "André", "Vitor", "Rafael", "Gustavo", "Thiago",
+    "Felipe", "Eduardo", "Daniel", "Henrique", "Bruno"
+  ];
 
-  for (let i = 0; i < 16; i++) {
-    const position = positions[Math.floor(i / 4)];
+  myTeam.players = [];
+  for (let i = 0; i < 11; i++) {
     myTeam.players.push({
-      name: `Jogador ${i + 1}`,
-      position,
-      skill: Math.floor(Math.random() * 40) + 60,
+      name: playerNames[i],
+      position: positions[i % positions.length],
+      skill: Math.floor(Math.random() * 40 + 60),
       stamina: 100,
-      status: "reserva",
+      status: "Titular"
     });
   }
-
-  // define titulares iniciais
-  myTeam.players.slice(0, 11).forEach(p => p.status = "titular");
+  for (let i = 11; i < 18; i++) {
+    myTeam.players.push({
+      name: playerNames[i % playerNames.length] + " Jr",
+      position: positions[i % positions.length],
+      skill: Math.floor(Math.random() * 40 + 50),
+      stamina: 100,
+      status: "Reserva"
+    });
+  }
 }
 
 export function getTitulares() {
-  return myTeam.players.filter(p => p.status === "titular");
-}
-
-export function getReservas() {
-  return myTeam.players.filter(p => p.status === "reserva");
+  return myTeam.players.filter(p => p.status === "Titular");
 }
