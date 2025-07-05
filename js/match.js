@@ -1,63 +1,63 @@
-// js/main.js
+// js/match.js
 
-import { initMatch } from "./match.js";
-import { myTeam, generateTeamPlayers } from "./team.js";
-import { iniciarCopa } from "./cup.js";
-import { salvarJogo, carregarJogo } from "./storage.js";
-import { aumentarReputacao } from "./reputation.js";
-import { sortearTimeRebaixado } from "./clubes.js";
-import { mostrarElenco } from "./elenco.js";
-import { mostrarTelaSubstituicoes } from "./substituicoes.js";
+import { clubesSerieA, clubesSerieB } from "./clubes.js";
+import { myTeam, getTitulares } from "./team.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Jogo carregado");
+export function initMatch() {
+  console.log("Iniciando simulação de partida...");
 
-  // Sorteia time inicial para o técnico
-  const timeSorteado = sortearTimeRebaixado();
-  myTeam.name = timeSorteado;
+  const adversarios = clubesSerieA.concat(clubesSerieB).filter(t => t !== myTeam.name);
+  const adversario = adversarios[Math.floor(Math.random() * adversarios.length)];
 
-  // Gera elenco
-  generateTeamPlayers();
-  atualizarHeader();
+  const homeScore = Math.floor(Math.random() * 4);
+  const awayScore = Math.floor(Math.random() * 4);
+  const eventos = gerarEventosMatch(homeScore + awayScore);
 
-  // Botões principais
-  document.getElementById("simulate-match-btn")?.addEventListener("click", () => {
-    initMatch();
-    aumentarReputacao(5);
-  });
+  const container = document.getElementById("partida-container");
+  container.innerHTML = `
+    <div id="partida-screen" class="game-screen active">
+      <h2>Simulação de Partida</h2>
+      <div class="scoreboard">
+        <span id="home-team-name-scoreboard">${myTeam.name}</span>
+        <span id="home-score">${homeScore}</span>
+        <span> - </span>
+        <span id="away-score">${awayScore}</span>
+        <span id="away-team-name-scoreboard">${adversario}</span>
+      </div>
+      <p id="match-minute" class="match-minute-display">Minuto: 90</p>
 
-  document.getElementById("iniciar-copa-btn")?.addEventListener("click", () => {
-    iniciarCopa(myTeam.name);
-  });
+      <div class="match-events-container">
+        <h3>Eventos da Partida</h3>
+        <ul id="events-list" class="scrollable match-event-list">
+          ${eventos.map(e => `<li>${e}</li>`).join("\n")}
+        </ul>
+      </div>
 
-  document.getElementById("salvar-btn")?.addEventListener("click", () => {
-    salvarJogo(myTeam);
-  });
+      <div class="subs-actions">
+        <button id="abrir-substituicoes-btn" class="main-btn">🔁 Substituições</button>
+        <button class="main-btn" onclick="voltarMenu()">Voltar</button>
+      </div>
+    </div>
+  `;
 
-  document.getElementById("carregar-btn")?.addEventListener("click", () => {
-    const dados = carregarJogo();
-    if (dados) {
-      Object.assign(myTeam, dados);
-      atualizarHeader();
-    }
-  });
-
-  document.getElementById("view-squad-btn")?.addEventListener("click", () => {
-    mostrarElenco();
-  });
-
-  // Botão de substituições (caso exista dinamicamente)
-  document.addEventListener("click", (e) => {
-    if (e.target && e.target.id === "abrir-substituicoes-btn") {
-      mostrarTelaSubstituicoes();
-    }
-  });
-});
-
-function atualizarHeader() {
-  document.getElementById("current-season").textContent = myTeam.season;
-  document.getElementById("current-round").textContent = myTeam.round;
-  document.getElementById("my-team-name").textContent = myTeam.name;
-  document.getElementById("team-money").textContent = "R$ " + myTeam.money.toLocaleString();
-  document.getElementById("team-nome").textContent = myTeam.name;
+  document.querySelectorAll('.game-screen').forEach(div => div.classList.remove('active'));
+  container.classList.add('active');
 }
+
+function gerarEventosMatch(totalGols) {
+  const jogadores = getTitulares();
+  const eventos = [];
+  for (let i = 0; i < totalGols; i++) {
+    const minuto = Math.floor(Math.random() * 90);
+    const jogador = jogadores[Math.floor(Math.random() * jogadores.length)];
+    eventos.push(`⚽ Gol de ${jogador.name} aos ${minuto}'`);
+  }
+  if (totalGols < 3) eventos.push("🟨 Cartão amarelo aos 44'");
+  if (totalGols === 0) eventos.push("🟥 Cartão vermelho aos 67'");
+  return eventos;
+}
+
+window.voltarMenu = function () {
+  document.querySelectorAll('.game-screen').forEach(div => div.classList.remove('active'));
+  document.getElementById("main-game-screen").classList.add("active");
+};
