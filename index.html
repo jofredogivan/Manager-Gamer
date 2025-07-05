@@ -20,8 +20,8 @@
     <!-- TELA INICIAL -->
     <div id="intro-screen" class="game-screen active">
       <h1>Football Manager</h1>
-      <p>Escolha um time em crise para começar sua carreira como técnico!</p>
-      <ul id="team-selection-list" class="scrollable"></ul>
+      <p>Você começará sua carreira em um time em crise. Leve-o à glória!</p>
+      <button id="simulate-match-btn" class="main-btn">Simular Partida</button>
     </div>
 
     <!-- TELA PRINCIPAL DO JOGO -->
@@ -43,21 +43,31 @@
       <button id="next-round-btn" class="main-btn">Próxima Rodada</button>
       <button id="view-squad-btn" class="main-btn">Ver Elenco</button>
       <button id="view-tactics-btn" class="main-btn">Táticas</button>
-      <button id="iniciar-copa-btn" class="main-btn">Iniciar Copa do Brasil</button>
-      
-      <!-- ✅ Novos botões para salvar e carregar progresso -->
-      <button id="salvar-btn" class="main-btn">💾 Salvar Progresso</button>
-      <button id="carregar-btn" class="main-btn">📂 Carregar Progresso</button>
+      <button id="view-standings-btn" class="main-btn">Classificação</button>
+      <button id="iniciar-copa-btn" class="main-btn">Iniciar Copa</button>
     </div>
 
-    <!-- TELAS CARREGADAS DINAMICAMENTE -->
+    <!-- TELA DE CLASSIFICAÇÃO -->
+    <div id="standings-screen" class="game-screen">
+      <h2>Classificação</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Time</th><th>PJ</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>Pts</th>
+          </tr>
+        </thead>
+        <tbody id="standings-body"></tbody>
+      </table>
+      <button class="main-btn" onclick="document.getElementById('main-game-screen').classList.add('active'); document.getElementById('standings-screen').classList.remove('active');">Voltar</button>
+    </div>
+
+    <!-- Containers dinâmicos -->
     <div id="elenco-container"></div>
     <div id="taticas-container"></div>
     <div id="partida-container"></div>
 
   </div>
 
-  <!-- ✅ Caminho correto para o script modular -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
