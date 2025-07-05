@@ -1,41 +1,37 @@
 // js/match.js
 
+import { clubesSerieA, clubesSerieB } from "./clubes.js";
+import { myTeam, getTitulares } from "./team.js";
+
 export function initMatch() {
   console.log("Iniciando simulação de partida...");
 
-  // Simulação de placar aleatório
-  const homeScore = Math.floor(Math.random() * 5);
-  const awayScore = Math.floor(Math.random() * 5);
+  // Escolhe adversário aleatório diferente do seu time
+  const adversarios = clubesSerieA.concat(clubesSerieB).filter(t => t !== myTeam.name);
+  const adversario = adversarios[Math.floor(Math.random() * adversarios.length)];
 
-  document.getElementById("home-score").textContent = homeScore;
-  document.getElementById("away-score").textContent = awayScore;
-  document.getElementById("match-minute").textContent = "Minuto: 90";
-  document.getElementById("events-list").innerHTML = `
-    <li>⚽ Gol marcado aos 23'</li>
-    <li>🟥 Cartão vermelho aos 45'</li>
-    <li>⚽ Gol marcado aos 78'</li>
-  `;
+  const homeScore = Math.floor(Math.random() * 4);
+  const awayScore = Math.floor(Math.random() * 4);
 
-  // Cria dinamicamente a tela se necessário
+  const eventos = gerarEventosMatch(homeScore + awayScore);
+
   const container = document.getElementById("partida-container");
   container.innerHTML = `
     <div id="partida-screen" class="game-screen active">
       <h2>Simulação de Partida</h2>
       <div class="scoreboard">
-        <span id="home-team-name-scoreboard">${"Meu Time"}</span>
+        <span id="home-team-name-scoreboard">${myTeam.name}</span>
         <span id="home-score">${homeScore}</span>
         <span> - </span>
         <span id="away-score">${awayScore}</span>
-        <span id="away-team-name-scoreboard">${"Adversário"}</span>
+        <span id="away-team-name-scoreboard">${adversario}</span>
       </div>
       <p id="match-minute" class="match-minute-display">Minuto: 90</p>
 
       <div class="match-events-container">
         <h3>Eventos da Partida</h3>
         <ul id="events-list" class="scrollable match-event-list">
-          <li>⚽ Gol marcado aos 23'</li>
-          <li>🟥 Cartão vermelho aos 45'</li>
-          <li>⚽ Gol marcado aos 78'</li>
+          ${eventos.map(e => `<li>${e}</li>`).join("\n")}
         </ul>
       </div>
 
@@ -45,9 +41,21 @@ export function initMatch() {
     </div>
   `;
 
-  // Mostra a tela de partida
   document.querySelectorAll('.game-screen').forEach(div => div.classList.remove('active'));
   container.classList.add('active');
+}
+
+function gerarEventosMatch(totalGols) {
+  const jogadores = getTitulares();
+  const eventos = [];
+  for (let i = 0; i < totalGols; i++) {
+    const minuto = Math.floor(Math.random() * 90);
+    const jogador = jogadores[Math.floor(Math.random() * jogadores.length)];
+    eventos.push(`⚽ Gol de ${jogador.name} aos ${minuto}'`);
+  }
+  if (totalGols < 3) eventos.push("🟨 Cartão amarelo aos 44'");
+  if (totalGols === 0) eventos.push("🟥 Cartão vermelho aos 67'");
+  return eventos;
 }
 
 window.voltarMenu = function () {
