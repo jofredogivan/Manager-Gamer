@@ -9,19 +9,17 @@ import { sortearTimeRebaixado } from "./clubes.js";
 import { mostrarElenco } from "./elenco.js";
 import { mostrarTelaSubstituicoes } from "./substituicoes.js";
 import { mostrarTelaTaticas } from "./taticas.js";
+import { iniciarTemporada, simularRodada, getClassificacao } from "./temporada.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
 
-  // Sorteia time inicial para o técnico
   const timeSorteado = sortearTimeRebaixado();
   myTeam.name = timeSorteado;
-
-  // Gera elenco
   generateTeamPlayers();
+  iniciarTemporada();
   atualizarHeader();
 
-  // Botões principais
   document.getElementById("simulate-match-btn")?.addEventListener("click", () => {
     initMatch();
     aumentarReputacao(5);
@@ -51,7 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarTelaTaticas();
   });
 
-  // Botão de substituições (caso exista dinamicamente)
+  document.getElementById("next-round-btn")?.addEventListener("click", () => {
+    const resultado = simularRodada();
+    alert(`Rodada ${resultado.rodada}: ${myTeam.name} ${resultado.placar} ${resultado.adversario}`);
+    atualizarClassificacao();
+  });
+
+  document.getElementById("view-standings-btn")?.addEventListener("click", () => {
+    mostrarClassificacao();
+  });
+
   document.addEventListener("click", (e) => {
     if (e.target && e.target.id === "abrir-substituicoes-btn") {
       mostrarTelaSubstituicoes();
@@ -65,4 +72,29 @@ function atualizarHeader() {
   document.getElementById("my-team-name").textContent = myTeam.name;
   document.getElementById("team-money").textContent = "R$ " + myTeam.money.toLocaleString();
   document.getElementById("team-nome").textContent = myTeam.name;
+}
+
+function atualizarClassificacao() {
+  const tabela = getClassificacao();
+  const corpo = document.getElementById("standings-body");
+  corpo.innerHTML = tabela.map(t => `
+    <tr class="${t.time === myTeam.name ? 'player-team-row' : ''}">
+      <td>${t.pos}</td>
+      <td>${t.time}</td>
+      <td>${t.v + t.e + t.d}</td>
+      <td>${t.v}</td>
+      <td>${t.e}</td>
+      <td>${t.d}</td>
+      <td>${t.gp}</td>
+      <td>${t.gc}</td>
+      <td>${t.gp - t.gc}</td>
+      <td>${t.pts}</td>
+    </tr>
+  `).join("");
+}
+
+function mostrarClassificacao() {
+  document.querySelectorAll('.game-screen').forEach(div => div.classList.remove('active'));
+  document.getElementById("standings-screen").classList.add("active");
+  atualizarClassificacao();
 }
