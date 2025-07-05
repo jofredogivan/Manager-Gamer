@@ -8,6 +8,7 @@ import { aumentarReputacao } from "./reputation.js";
 import { sortearTimeRebaixado } from "./clubes.js";
 import { mostrarElenco } from "./elenco.js";
 import { mostrarTelaSubstituicoes } from "./substituicoes.js";
+import { mostrarTelaTaticas } from "./taticas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
@@ -44,6 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("view-squad-btn")?.addEventListener("click", () => {
     mostrarElenco();
+  });
+
+  document.getElementById("view-tactics-btn")?.addEventListener("click", () => {
+    mostrarTelaTaticas();
   });
 
   // Botão de substituições (caso exista dinamicamente)
