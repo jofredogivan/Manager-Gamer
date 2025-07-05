@@ -5,11 +5,16 @@ import { myTeam, generateTeamPlayers } from "./team.js";
 import { iniciarCopa } from "./cup.js";
 import { salvarJogo, carregarJogo } from "./storage.js";
 import { aumentarReputacao } from "./reputation.js";
+import { sortearTimeRebaixado } from "./clubes.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
 
-  // Inicializa time
+  // Sorteia time inicial para o técnico
+  const timeSorteado = sortearTimeRebaixado();
+  myTeam.name = timeSorteado;
+
+  // Gera elenco
   generateTeamPlayers();
   atualizarHeader();
 
@@ -41,4 +46,5 @@ function atualizarHeader() {
   document.getElementById("current-round").textContent = myTeam.round;
   document.getElementById("my-team-name").textContent = myTeam.name;
   document.getElementById("team-money").textContent = "R$ " + myTeam.money.toLocaleString();
+  document.getElementById("team-nome").textContent = myTeam.name;
 }
