@@ -6,6 +6,7 @@ import { iniciarCopa } from "./cup.js";
 import { salvarJogo, carregarJogo } from "./storage.js";
 import { aumentarReputacao } from "./reputation.js";
 import { sortearTimeRebaixado } from "./clubes.js";
+import { mostrarElenco } from "./elenco.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
@@ -38,6 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
       Object.assign(myTeam, dados);
       atualizarHeader();
     }
+  });
+
+  document.getElementById("view-squad-btn")?.addEventListener("click", () => {
+    mostrarElenco();
   });
 });
 
