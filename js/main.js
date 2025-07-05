@@ -11,10 +11,9 @@ import { mostrarTelaSubstituicoes } from "./substituicoes.js";
 import { mostrarTelaTaticas } from "./taticas.js";
 import { iniciarTemporada, simularRodada, getClassificacao } from "./temporada.js";
 import { iniciarPartidaTempoReal } from "./tempoReal.js";
+import { verificarConvite } from "./convites.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Jogo carregado");
-
   const timeSorteado = sortearTimeRebaixado();
   myTeam.name = timeSorteado;
   generateTeamPlayers();
@@ -25,6 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultado = simularRodada();
     if (resultado.fim) {
       alert(resultado.mensagem);
+      const classificacao = getClassificacao();
+      const posicao = classificacao.find(t => t.time === myTeam.name)?.pos;
+      verificarConvite(posicao, myTeam.reputation);
       return;
     }
     iniciarPartidaTempoReal(resultado.adversario);
