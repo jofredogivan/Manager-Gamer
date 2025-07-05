@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Football Manager</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('Service Worker registrado:', reg))
-        .catch(err => console.warn('Erro no Service Worker:', err));
-    }
-  </script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
   <div class="game-container">
-
     <!-- TELA INICIAL -->
     <div id="intro-screen" class="game-screen active">
       <h1>Football Manager</h1>
@@ -24,7 +16,7 @@
       <button id="simulate-match-btn" class="main-btn">Simular Partida</button>
     </div>
 
-    <!-- TELA PRINCIPAL DO JOGO -->
+    <!-- TELA PRINCIPAL -->
     <div id="main-game-screen" class="game-screen">
       <div id="team-banner">
         <span id="team-escudo" style="font-size: 2em;">⚽</span>
@@ -61,13 +53,19 @@
       <button class="main-btn" onclick="document.getElementById('main-game-screen').classList.add('active'); document.getElementById('standings-screen').classList.remove('active');">Voltar</button>
     </div>
 
-    <!-- Containers dinâmicos -->
+    <!-- CONTAINERS DINÂMICOS -->
     <div id="elenco-container"></div>
     <div id="taticas-container"></div>
     <div id="partida-container"></div>
-
   </div>
 
   <script type="module" src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('SW registrado:', reg))
+        .catch(err => console.warn('Erro ao registrar SW:', err));
+    }
+  </script>
 </body>
 </html>
