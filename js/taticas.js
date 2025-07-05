@@ -2,41 +2,45 @@
 
 import { myTeam } from "./team.js";
 
-const formacoesDisponiveis = [
-  { nome: "4-4-2", descricao: "4 zagueiros, 4 meio-campistas, 2 atacantes" },
-  { nome: "4-3-3", descricao: "4 zagueiros, 3 meio-campistas, 3 atacantes" },
-  { nome: "3-5-2", descricao: "3 zagueiros, 5 meio-campistas, 2 atacantes" },
-  { nome: "5-3-2", descricao: "5 defensores, 3 meio-campistas, 2 atacantes" }
-];
-
 export function mostrarTelaTaticas() {
   const container = document.getElementById("taticas-container");
-
   container.innerHTML = `
-    <div id="taticas-screen" class="game-screen active">
-      <h2>Formações Táticas</h2>
-      <div class="scrollable">
-        ${formacoesDisponiveis.map(f => `
-          <button class="main-btn" onclick="selecionarFormacao('${f.nome}')">
-            ${f.nome} - ${f.descricao}
-          </button>
-        `).join('')}
+    <div class="game-screen active">
+      <h2>Configurar Táticas</h2>
+      <div>
+        <h3>Formação</h3>
+        <select id="formacao-select">
+          <option value="4-4-2">4-4-2</option>
+          <option value="4-3-3">4-3-3</option>
+          <option value="3-5-2">3-5-2</option>
+        </select>
       </div>
-      <button class="main-btn" onclick="voltarMenu()">Voltar</button>
+      <div>
+        <h3>Mentalidade</h3>
+        <select id="mentalidade-select">
+          <option value="defensive">Defensiva</option>
+          <option value="balanced">Equilibrada</option>
+          <option value="attacking">Ofensiva</option>
+        </select>
+      </div>
+      <button class="main-btn" onclick="salvarTaticas()">Salvar</button>
+      <button class="main-btn" onclick="fecharTaticas()">Voltar</button>
     </div>
   `;
-
   document.querySelectorAll('.game-screen').forEach(div => div.classList.remove('active'));
   container.classList.add('active');
+  document.getElementById("formacao-select").value = myTeam.formation;
+  document.getElementById("mentalidade-select").value = myTeam.mentality;
 }
 
-window.selecionarFormacao = function(formacao) {
-  myTeam.formacao = formacao;
-  alert(`Formação ${formacao} aplicada ao time!`);
-  voltarMenu();
+window.salvarTaticas = function() {
+  myTeam.formation = document.getElementById("formacao-select").value;
+  myTeam.mentality = document.getElementById("mentalidade-select").value;
+  alert("Táticas salvas com sucesso!");
+  fecharTaticas();
 };
 
-window.voltarMenu = function () {
-  document.querySelectorAll('.game-screen').forEach(div => div.classList.remove('active'));
+window.fecharTaticas = function() {
   document.getElementById("main-game-screen").classList.add("active");
+  document.getElementById("taticas-container").innerHTML = "";
 };
