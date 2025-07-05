@@ -10,6 +10,7 @@ import { mostrarElenco } from "./elenco.js";
 import { mostrarTelaSubstituicoes } from "./substituicoes.js";
 import { mostrarTelaTaticas } from "./taticas.js";
 import { iniciarTemporada, simularRodada, getClassificacao } from "./temporada.js";
+import { iniciarPartidaTempoReal } from "./tempoReal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Jogo carregado");
@@ -21,8 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarHeader();
 
   document.getElementById("simulate-match-btn")?.addEventListener("click", () => {
-    initMatch();
-    aumentarReputacao(5);
+    const resultado = simularRodada();
+    if (resultado.fim) {
+      alert(resultado.mensagem);
+      return;
+    }
+    iniciarPartidaTempoReal(resultado.adversario);
   });
 
   document.getElementById("iniciar-copa-btn")?.addEventListener("click", () => {
@@ -47,12 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("view-tactics-btn")?.addEventListener("click", () => {
     mostrarTelaTaticas();
-  });
-
-  document.getElementById("next-round-btn")?.addEventListener("click", () => {
-    const resultado = simularRodada();
-    alert(`Rodada ${resultado.rodada}: ${myTeam.name} ${resultado.placar} ${resultado.adversario}`);
-    atualizarClassificacao();
   });
 
   document.getElementById("view-standings-btn")?.addEventListener("click", () => {
