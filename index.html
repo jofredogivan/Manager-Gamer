@@ -1,25 +1,63 @@
-<!-- TELA PRINCIPAL DO JOGO -->
-<div id="main-game-screen" class="game-screen">
-  <div id="team-banner">
-    <span id="team-escudo" style="font-size: 2em;">⚽</span>
-    <h2 id="team-nome">Seu Time</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registrado:', reg))
+        .catch(err => console.warn('Erro no Service Worker:', err));
+    }
+  </script>
+</head>
+<body>
+  <div class="game-container">
+
+    <!-- TELA INICIAL -->
+    <div id="intro-screen" class="game-screen active">
+      <h1>Football Manager</h1>
+      <p>Escolha um time em crise para começar sua carreira como técnico!</p>
+      <ul id="team-selection-list" class="scrollable"></ul>
+    </div>
+
+    <!-- TELA PRINCIPAL DO JOGO -->
+    <div id="main-game-screen" class="game-screen">
+      <div id="team-banner">
+        <span id="team-escudo" style="font-size: 2em;">⚽</span>
+        <h2 id="team-nome">Seu Time</h2>
+      </div>
+
+      <div class="header-info">
+        <p>Temporada: <span id="current-season"></span></p>
+        <p>Rodada: <span id="current-round"></span></p>
+        <p>Time: <span id="my-team-name"></span></p>
+        <p>Dinheiro: <span id="team-money"></span></p>
+      </div>
+
+      <div id="game-message" class="game-message game-message-info"></div>
+
+      <button id="next-round-btn" class="main-btn">Próxima Rodada</button>
+      <button id="view-squad-btn" class="main-btn">Ver Elenco</button>
+      <button id="view-tactics-btn" class="main-btn">Táticas</button>
+      <button id="iniciar-copa-btn" class="main-btn">Iniciar Copa do Brasil</button>
+      
+      <!-- ✅ Novos botões para salvar e carregar progresso -->
+      <button id="salvar-btn" class="main-btn">💾 Salvar Progresso</button>
+      <button id="carregar-btn" class="main-btn">📂 Carregar Progresso</button>
+    </div>
+
+    <!-- TELAS CARREGADAS DINAMICAMENTE -->
+    <div id="elenco-container"></div>
+    <div id="taticas-container"></div>
+    <div id="partida-container"></div>
+
   </div>
 
-  <div class="header-info">
-    <p>Temporada: <span id="current-season"></span></p>
-    <p>Rodada: <span id="current-round"></span></p>
-    <p>Time: <span id="my-team-name"></span></p>
-    <p>Dinheiro: <span id="team-money"></span></p>
-  </div>
-
-  <div id="game-message" class="game-message game-message-info"></div>
-
-  <button id="next-round-btn" class="main-btn">Próxima Rodada</button>
-  <button id="view-squad-btn" class="main-btn">Ver Elenco</button>
-  <button id="view-tactics-btn" class="main-btn">Táticas</button>
-  <button id="iniciar-copa-btn" class="main-btn">Iniciar Copa do Brasil</button>
-
-  <!-- ✅ Novos botões de controle -->
-  <button id="salvar-btn" class="main-btn">💾 Salvar Progresso</button>
-  <button id="carregar-btn" class="main-btn">📂 Carregar Progresso</button>
-</div>
+  <!-- ✅ Caminho correto para o script modular -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
