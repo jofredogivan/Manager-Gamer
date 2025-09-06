@@ -1,214 +1,150 @@
-/* ----- ESTILO GLOBAL ----- */
+/* Global */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    background: #e0e0e0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f2f4f7;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-header {
-    background: #002244;
-    color: white;
-    width: 100%;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-nav#menu {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 10px 0;
-}
-
-nav#menu button {
-    padding: 10px 15px;
-    background: #004080;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-nav#menu button:hover {
-    background: #0066cc;
-}
-
-main {
-    max-width: 1000px;
-    width: 100%;
-    padding: 10px;
-}
-
-/* ----- SEÇÕES ----- */
-section {
-    background: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* ----- LISTAS DE TIMES E JOGADORES ----- */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.3s;
-}
-
-li:hover {
-    background: #f0f0f0;
-}
-
-/* ----- CARTÕES DE JOGADOR ----- */
-.player-card {
-    display: flex;
-    flex-direction: column;
-    background: #f8f8f8;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.skill-bar {
-    height: 8px;
-    border-radius: 4px;
-    background: #ccc;
-    margin-top: 5px;
-    position: relative;
-}
-
-.skill-bar span {
-    display: block;
-    height: 100%;
-    border-radius: 4px;
-    background: #004080;
-}
-
-/* ----- TABELA LIGA ----- */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-}
-
-thead {
-    background: #004080;
-    color: white;
-}
-
-tbody tr:hover {
-    background: #f0f0f0;
-}
-
-/* ----- BOTOES ----- */
-button {
-    padding: 8px 12px;
-    margin: 5px 0;
-    background: #004080;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #0066cc;
-}
-
-/* ----- TELA INICIAL ----- */
+/* Tela inicial */
 #welcome-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg,#004080,#0080ff);
-    color: white;
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
-
 #welcome-screen h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
-
-#welcome-screen p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
-
-#welcome-screen select {
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1em;
-    margin-bottom: 20px;
-}
-
+#welcome-screen select,
 #welcome-screen button {
-    padding: 12px 25px;
-    font-size: 1.2em;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: #004080;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
 }
-
+#welcome-screen select {
+  background: white;
+  color: #333;
+}
+#welcome-screen button {
+  background: #2980b9;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 #welcome-screen button:hover {
-    background: #0066cc;
+  background: #1c5980;
 }
 
-/* ----- RESPONSIVO ----- */
-@media screen and (max-width: 768px){
-    nav#menu {
-        flex-direction: column;
-    }
-
-    li {
-        font-size: 0.9em;
-    }
-
-    header {
-        font-size: 1.2em;
-    }
+/* Header & Menu */
+header {
+  background: #34495e;
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+}
+nav#menu {
+  display: flex;
+  gap: 10px;
+  margin: 15px;
+}
+nav#menu button {
+  background: #2980b9;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+nav#menu button:hover {
+  background: #1c5980;
 }
 
-/* ----- ANIMAÇÃO ----- */
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+/* Main Sections */
+main {
+  width: 90%;
+  max-width: 900px;
+}
+section {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* List Items */
+ul { list-style:none; padding:0; }
+li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+li:last-child { border-bottom: none; }
+li:hover { background: #f7f9fc; }
+
+/* Skill bar */
+.player-card {
+  width: 100%;
+}
+.skill-bar {
+  background: #dde7ed;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+.skill-bar span {
+  display: block;
+  height: 100%;
+  background: #3498db;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+thead {
+  background: #2980b9;
+  color: white;
+}
+
+/* Buttons */
+button {
+  padding: 8px 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #2980b9;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #1c5980;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #welcome-screen h1 { font-size: 2rem; }
+  nav#menu { flex-direction: column; align-items: stretch; }
 }
