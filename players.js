@@ -1,5 +1,11 @@
 // players.js
 window.playerNames = [
+  "Gabriel Barbosa", "Pedro", "Arrascaeta", "Gerson", "Bruno Henrique",
+  "Everton Cebolinha", "Rony", "Marinho", "Kenedy", "Edenilson",
+  "Galhardo", "Igor Gomes", "Alisson", "Cuca", "Diego Costa",
+  "Diego Souza", "Fernandinho", "Zé Rafael", "Felipe Melo", "Hudson",
+  "Leandro Pereira", "Fred", "Cano", "Alan Kardec", "Andrey",
+  "Súarez", "Rafinha", "Wallace", "João Paulo", "Thiago Galhardo"
   "Carlos","João","Pedro","Lucas","Gabriel","Rafael","Bruno","Mateus",
   "Vinicius","Gustavo","Felipe","Thiago","Leonardo","Daniel","André",
   "Murilo","Diego","Vitor","Caio","Igor","Eduardo","Fernando","Henrique",
@@ -16,3 +22,4 @@ window.playerNames = [
   "Diego Fernandes", "Rodrigo Azevedo", "Fábio Nogueira",
   "Alexandre Pinto", "Henrique Duarte"
 ];
+
